@@ -26,3 +26,9 @@ class Game
 
 end
 
+
+
+
+chess = Game.new(HumanPlayer.new(:o), HumanPlayer.new(:x))
+
+chess.play
