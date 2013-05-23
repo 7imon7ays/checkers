@@ -5,12 +5,47 @@ class Piece
 
   def initialize(color)
    @color = color
-   @slide_moves = # array of coordinates in slide perimeter.
-   @jump_moves =  # array of coordinates in jump perimeter.
+   @color == :o ? o_move_deltas : x_move_deltas
+   @status = :man
+  end
+
+  def o_move_deltas
+    @slide_moves = [
+      [-1, 1],
+      [1, 1]
+    ]
+
+    @jump_moves = [
+      [2, 2],
+      [2, -2],
+      [-2, 2],
+      [-2, -2]
+    ]
+  end
+
+  def x_move_deltas
+    @slide_moves = [
+      [-1, -1],
+      [1, -1]
+    ]
+    @jump_moves = [
+      [2, 2],
+      [2, -2],
+      [-2, 2],
+      [-2, -2]
+    ]
   end
 
   def promote
-    # modifies Piece's moves
+    @status = :king
+  end
+
+  def to_s
+    if color == :o
+      @status == :man ? "o" : "O"
+    else
+      @status == :man ? "x" : "X"
+    end
   end
 
 end

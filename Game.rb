@@ -1,3 +1,7 @@
+require 'Board'
+require 'Piece'
+require 'Player'
+
 class Game
 
   def initialize(o_player, x_player)
