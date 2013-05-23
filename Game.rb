@@ -19,7 +19,7 @@ class Game
     while true
       # Most error handling happens here.
       move = @current_player.get_input
-      @board.perform_move(move)
+      @board.perform_moves(@current_player, move)
       @current_player = ([o_player, x_player] - @current_player).first
     end
   end

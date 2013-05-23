@@ -6,34 +6,22 @@ class Piece
   def initialize(color)
    @color = color
    @color == :o ? o_move_deltas : x_move_deltas
+   @slide_moves = @color == :o ? o_move_deltas : x_move_deltas
+   @jump_moves = [
+     [-2, -2],
+     [-2, 2],
+     [2, -2],
+     [2, 2]
+   ]
    @status = :man
   end
 
   def o_move_deltas
-    @slide_moves = [
-      [-1, 1],
-      [1, 1]
-    ]
-
-    @jump_moves = [
-      [2, 2],
-      [2, -2],
-      [-2, 2],
-      [-2, -2]
-    ]
+    [[-1, -1], [-1, 1]]
   end
 
   def x_move_deltas
-    @slide_moves = [
-      [-1, -1],
-      [1, -1]
-    ]
-    @jump_moves = [
-      [2, 2],
-      [2, -2],
-      [-2, 2],
-      [-2, -2]
-    ]
+    [[1, -1],[1, 1]]
   end
 
   def promote
