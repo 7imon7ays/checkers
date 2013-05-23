@@ -136,7 +136,7 @@ class Board # Need to know: Game#current_player
 end
 
 board = Board.new
-board.perform_moves(:o, [[6,1],[5,2]] )
-board.perform_moves(:x, [[3,4],[4,3]] )
-board.perform_moves(:o, [[5,2],[3,4]] )
+# board.perform_moves(:o, [[6,1],[5,2]] )
+# board.perform_moves(:x, [[3,4],[4,3]] )
+# board.perform_moves(:o, [[5,2],[3,4]] )
 
