@@ -1,6 +1,7 @@
-require 'Board'
-require 'Piece'
-require 'Player'
+require './Board.rb'
+require './Piece.rb'
+require './Player.rb'
+require './MoveValidator.rb'
 
 class Game
 
@@ -17,10 +18,20 @@ class Game
   def take_turn
 
     while true
-      # Most error handling happens here.
-      move = @current_player.get_input
-      @board.perform_moves(@current_player, move)
-      @current_player = ([o_player, x_player] - @current_player).first
+      puts "Now playing: #{@current_player.color.upcase}"
+      begin
+        move = @current_player.get_input
+        @board.perform_moves(@current_player, move)
+        @current_player = ([@o_player, @x_player] - [@current_player]).first
+      rescue InvalidMoveError
+        puts "That is not a valid move!"
+        retry
+      rescue WrongFormatError => e
+        puts "Wrong format!"
+        puts "Row must be a number between A and J."
+        puts "Column must be a number beween 0 and 9"
+        retry
+      end
     end
   end
 
@@ -29,6 +40,9 @@ end
 
 
 
-chess = Game.new(HumanPlayer.new(:o), HumanPlayer.new(:x))
+o = HumanPlayer.new(:o)
+x = HumanPlayer.new(:x)
+
+chess = Game.new(o, x)
 
 chess.play

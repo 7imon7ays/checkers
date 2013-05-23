@@ -1,4 +1,4 @@
-require 'Move_validator'
+require './MoveValidator.rb'
 
 class InvalidMoveError < NoMethodError
 end
@@ -17,11 +17,11 @@ class Board
   end
 
   def render
-  letters = "    " + ("A"..'J').to_a.join("   ")
+  letters = "   " + ("A"..'J').to_a.join(" ")
   puts letters
   @grid.each_with_index do |row, y_coord|
     print "#{y_coord} |"
-    print row.join(" | ")
+    print row.join("|")
     puts "| #{y_coord}"
   end
   puts letters
