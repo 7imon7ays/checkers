@@ -30,9 +30,9 @@ class Piece
 
   def to_s
     if color == :o
-      @status == :man ? "o" : "O"
+      @status == :man ? "o".colorize(:blue) : "O".colorize(:blue)
     else
-      @status == :man ? "x" : "X"
+      @status == :man ? "x".colorize(:red) : "X".colorize(:red)
     end
   end
 

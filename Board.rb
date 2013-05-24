@@ -1,10 +1,33 @@
+# require 'colorize'
+# require './Piece.rb'
 require './MoveValidator.rb'
+
+class Array
+
+  def deep_dup
+    return [] if self.empty?
+
+    duplicate = []
+
+    self.each do |el|
+      if el.is_a?(Array)
+        duplicate << el.deep_dup
+      else
+        duplicate << el
+      end
+    end
+    duplicate
+  end
+end
 
 class InvalidMoveError < NoMethodError
 end
 
 
 class Board
+
+  attr_accessor :grid
+
   include MoveValidator
 
   def initialize
@@ -12,17 +35,19 @@ class Board
     @captured_pieces = []
 
     place_pieces
+  end
 
-    render
+  def delete_piece(x, y)
+    @grid[x][y] = "_"
   end
 
   def render
-  letters = "   " + ("A"..'J').to_a.join(" ")
+  letters = "   " + ("A"..'J').to_a.join(" ").colorize(:white)
   puts letters
   @grid.each_with_index do |row, y_coord|
-    print "#{y_coord} |"
-    print row.join("|")
-    puts "| #{y_coord}"
+    print "#{y_coord} |".colorize(:white)
+    print row.join("|").colorize(:white)
+    puts "| #{y_coord}".colorize(:white)
   end
   puts letters
   end

@@ -15,9 +15,15 @@ end
 class HumanPlayer < Player
 
   def get_input
-    puts "Input a sequence of move coordinates"
+    puts "Input a sequence of move coordinates".colorize(:white)
     command = gets.chomp
-    format_input(command)
+    if command == "save"
+      return :save
+    elsif command == "load"
+      return :load
+    else
+      format_input(command)
+    end
   end
 
   def format_input(command)

@@ -9,10 +9,16 @@ module MoveValidator
     p "move_sequence: #{move_sequence}"
     move_sequence.each { |position| p piece_at(position)}
 
+    p "current player: #{color}"
+    p "piece at start pos: #{piece_at(start_pos).color}"
+
     return false if piece_at(start_pos) == "_"
     return false unless piece_at(start_pos).color == color
 
     # SLIDE ONLY ALLOWED WHEN NO JUMP POSSIBLE
+
+    puts "move is a jump? #{move_is_a_jump?(move_sequence)}"
+
     move_is_a_jump?(move_sequence) ? valid_jump_sequence?(color, move_sequence) : valid_slide_move?(move_sequence)
   end
 
@@ -28,6 +34,8 @@ module MoveValidator
 
     return false unless piece_at(end_pos) == "_"
 
+    p "piece's deltas: #{piece_at(start_pos).slide_moves}"
+
     piece_at(start_pos).slide_moves.any? do |slide_move|
       x_lines_up = start_pos[0] + slide_move[0] == end_pos[0]
       y_lines_up = start_pos[1] + slide_move[1] == end_pos[1]
@@ -36,6 +44,8 @@ module MoveValidator
   end
 
   def valid_jump_sequence?(color, move_sequence)
+    grid = @grid.deep_dup
+
     move_sequence.each_with_index do |pos, move_idx|
       next if pos == move_sequence.last
       return false unless this_jump_possible?(color, pos, move_sequence[move_idx + 1])
