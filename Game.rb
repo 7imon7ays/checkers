@@ -24,9 +24,9 @@ class Game
   def take_turn
     while true
       @board.render
-      puts "Now playing: #{@current_player.color.upcase}".colorize(:white)
-      move = @current_player.get_input
       begin
+        puts "Now playing: #{@current_player.color.upcase}".colorize(:white)
+        move = @current_player.get_input
         save if move == :save
         @board.perform_moves(@current_player, move)
         @current_player = ([@o_player, @x_player] - [@current_player]).first
@@ -62,7 +62,7 @@ if __FILE__ == $PROGRAM_NAME
   else
     o = HumanPlayer.new(:o)
     x = HumanPlayer.new(:x)
-    game = Game.new
+    game = Game.new(o, x)
   end
   game.play
 end

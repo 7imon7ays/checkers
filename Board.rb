@@ -61,9 +61,9 @@ class Board
     end
   end
 
-  def piece_at(pos)
+  def piece_at(grid, pos)
     x_coord, y_coord = pos
-    @grid[x_coord][y_coord]
+    grid[x_coord][y_coord]
   end
 
   def perform_moves(player, move_sequence)
@@ -72,10 +72,10 @@ class Board
 
     raise InvalidMoveError unless valid_move_sequence?(player, move_sequence)
 
-    perform_moves!(move_sequence)
+    perform_moves!(@grid, move_sequence)
   end
 
-  def perform_moves!(move_sequence)
+  def perform_moves!(grid, move_sequence)
     clear_prisoners_from_board
 
     start_pos, end_pos = move_sequence.first, move_sequence.last
@@ -83,11 +83,9 @@ class Board
     starting_x, starting_y = start_pos
     ending_x, ending_y = end_pos
 
-    moved_piece = piece_at(start_pos)
-    @grid[starting_x][starting_y] = "_"
-    @grid[ending_x][ending_y] = moved_piece
-
-    render
+    moved_piece = piece_at(grid, start_pos)
+    grid[starting_x][starting_y] = "_"
+    grid[ending_x][ending_y] = moved_piece
   end
 
   def clear_prisoners_from_board

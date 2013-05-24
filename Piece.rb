@@ -32,7 +32,7 @@ class Piece
     if color == :o
       @status == :man ? "o".colorize(:blue) : "O".colorize(:blue)
     else
-      @status == :man ? "x".colorize(:red) : "X".colorize(:red)
+      @status == :man ? "o".colorize(:red) : "O".colorize(:red)
     end
   end
 
