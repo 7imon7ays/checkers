@@ -1,5 +1,3 @@
-# require 'colorize'
-# require './Piece.rb'
 require './MoveValidator.rb'
 
 class Array

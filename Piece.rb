@@ -1,6 +1,5 @@
 class Piece
 
-  # moves are modified by #promotes internally so no accessor is needed/
   attr_reader :color, :slide_moves, :jump_moves
 
   def initialize(color)
@@ -32,7 +31,7 @@ class Piece
     if color == :o
       @status == :man ? "o".colorize(:blue) : "O".colorize(:blue)
     else
-      @status == :man ? "o".colorize(:red) : "O".colorize(:red)
+      @status == :man ? "x".colorize(:red) : "X".colorize(:red)
     end
   end
 
